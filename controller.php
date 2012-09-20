@@ -28,59 +28,7 @@ class MediaController extends JController
 	 * @return	JController		This object to support chaining.
 	 * @since	1.5
 	 */
-	public function display($cachable = false, $urlparams = false)
-	{
-		JPluginHelper::importPlugin('content');
-		$vName = JRequest::getCmd('view', 'media');
-		switch ($vName)
-		{
-			case 'images':
-				$vLayout = JRequest::getCmd('layout', 'default');
-				$mName = 'manager';
-
-				break;
-
-			case 'imagesList':
-				$mName = 'list';
-				$vLayout = JRequest::getCmd('layout', 'default');
-
-				break;
-
-			case 'mediaList':
-				$app	= JFactory::getApplication();
-				$mName = 'list';
-				$vLayout = $app->getUserStateFromRequest('media.list.layout', 'layout', 'thumbs', 'word');
-
-				break;
-
-			case 'media':
-			default:
-				$vName = 'media';
-				$vLayout = JRequest::getCmd('layout', 'default');
-				$mName = 'manager';
-				break;
-		}
-
-		$document = JFactory::getDocument();
-		$vType		= $document->getType();
-
-		// Get/Create the view
-		$view = $this->getView($vName, $vType);
-
-		// Get/Create the model
-		if ($model = $this->getModel($mName)) {
-			// Push the model into the view (as default)
-			$view->setModel($model, true);
-		}
-
-		// Set the layout
-		$view->setLayout($vLayout);
-
-		// Display the view
-		$view->display();
-
-		return $this;
-	}
+	
 
 	function ftpValidate()
 	{
